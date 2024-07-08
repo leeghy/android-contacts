@@ -13,7 +13,6 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -77,16 +76,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkValide(): Boolean {
-        if (name.text.isEmpty()) {
-            Toast.makeText(this, "이름은 필수 입력값입니다.", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        else if (tel.text.isEmpty()) {
-            Toast.makeText(this, "전화번호는 필수 입력값입니다.", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        else {
-            return true
+        return when {
+            name.text.isEmpty() -> {
+                Toast.makeText(this, "이름은 필수 입력값입니다.", Toast.LENGTH_SHORT).show()
+                false
+            }
+            tel.text.isEmpty() -> {
+                Toast.makeText(this, "전화번호는 필수 입력값입니다.", Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> true
         }
     }
     private fun showCalendar() {

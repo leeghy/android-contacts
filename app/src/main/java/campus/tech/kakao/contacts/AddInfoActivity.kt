@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -19,11 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.collections.ArrayList
 
-class AddInfo : AppCompatActivity() {
+class AddInfoActivity : AppCompatActivity() {
     private lateinit var addBtn: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var infoText: TextView
-    private var contactList = ArrayList<Contact>()
+    private val contactList = ArrayList<Contact>()
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
@@ -47,7 +46,7 @@ class AddInfo : AppCompatActivity() {
 
     private fun setUpListeners() {
         addBtn.setOnClickListener {
-            val intent = Intent(this@AddInfo, MainActivity::class.java)
+            val intent = Intent(this@AddInfoActivity, MainActivity::class.java)
             resultLauncher.launch(intent)
         }
     }
@@ -89,13 +88,13 @@ class AddInfo : AppCompatActivity() {
         private val context: Context
     ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-        inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val faceImg: ImageView
-            val name_text_view: TextView
+            val nameTextView: TextView
 
             init {
                 faceImg = itemView.findViewById(R.id.faceImg)
-                name_text_view = itemView.findViewById(R.id.name_text_view)
+                nameTextView = itemView.findViewById(R.id.name_text_view)
             }
 
         }
@@ -106,7 +105,7 @@ class AddInfo : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val contact = contactList[position]
-            holder.name_text_view.text = contact.name
+            holder.nameTextView.text = contact.name
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, ContactDetail::class.java).apply {

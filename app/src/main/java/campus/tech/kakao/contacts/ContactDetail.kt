@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 
 class ContactDetail : AppCompatActivity() {
     lateinit var detailName: TextView
@@ -64,9 +65,9 @@ class ContactDetail : AppCompatActivity() {
     }
 
     private fun setDetailLayoutVisibility(contact: Contact) {
-        detailMailLayout.visibility = if (contact.mail.isEmpty()) View.GONE else View.VISIBLE
-        detailBirthLayout.visibility = if (contact.birth.isEmpty()) View.GONE else View.VISIBLE
-        detailGenderLayout.visibility = if (contact.gender == "null") View.GONE else View.VISIBLE
-        detailMemoLayout.visibility = if (contact.memo.isEmpty()) View.GONE else View.VISIBLE
+        detailMailLayout.isVisible = contact.mail.isNotEmpty()
+        detailBirthLayout.isVisible = contact.birth.isNotEmpty()
+        detailGenderLayout.isVisible = contact.gender != "null"
+        detailMemoLayout.isVisible = contact.memo.isNotEmpty()
     }
 }
